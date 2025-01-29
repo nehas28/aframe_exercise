@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mondrian Exhibit in A-Frame</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Camera Setup -->
+      <a-entity camera wasd-controls look-controls position="0 3 2"></a-entity>
+
+      <!-- Lighting -->
+      <a-light type="ambient" color="#666"></a-light>
+      <a-light type="directional" position="5 10 5" intensity="0.8"></a-light>
+
+      <!-- Museum Floor -->
+      <a-plane position="0 0 -3" rotation="-90 0 0" width="12" height="12" color="gray"></a-plane>
+
+      <!-- Museum Walls -->
+      <a-box position="0 4 -6" width="12" height="8" depth="0.2" color="#B3A369"></a-box> <!-- Back Wall -->
+      <a-box position="-6 4 -3" width="0.2" height="8" depth="12" color="#B3A369"></a-box> <!-- Left Wall -->
+      <a-box position="6 4 -3" width="0.2" height="8" depth="12" color="#B3A369"></a-box> <!-- Right Wall -->
+      <a-box position="0 8 -3" rotation="90 0 0" width="12" height="12" depth="0.2" color="#B3A369"></a-box> <!-- Ceiling -->
+      <a-box position="0 0 3" width="12" height="8" depth="0.2" color="#B3A369"></a-box> <!-- Front Wall -->
+      
+
+      <!-- Picture Frames on the Left Wall -->
+      <a-entity id="frame-left-1" 
+                geometry="primitive: box; width: 5.6; height: 3.2; depth: 0.2" 
+                material="color: gold" 
+                position="-4.2 3 -4.6"
+                animation="property: rotation; to: 0 360 0; dur: 5000; loop: true"></a-entity>
+      <a-entity geometry="primitive: box; width: 5.2; height: 2.8; depth: 0.2" 
+                material="color: white" 
+                position="-4.2 3 -4.5"></a-entity> <!-- Painting Background -->
+      <a-entity id="left-blue-1" 
+                geometry="primitive: box; width: 0.8; height: 0.8; depth: 0.1" 
+                material="color: blue" 
+                position="-5.6 3.2 -4.4"
+                animation="property: position; to: -5.6 3.5 -4.4; dir: alternate; dur: 2000; loop: true"></a-entity> <!-- Additional Blue Shape -->
+
+      <!-- Adding Light Beam to Left Painting -->
+      <a-light type="spot" color="#fff" intensity="1.5" angle="45" position="-5 5 -4"
+               target="#frame-left-1" castShadow="true"></a-light>
+
+      <!-- Additional Frames and Animated Artwork on the Left Wall -->
+      <a-entity id="frame-left-2" 
+                geometry="primitive: box; width: 5.6; height: 3.2; depth: 0.2" 
+                material="color: gold" 
+                position="-4.2 1.2 -4.6"
+                animation="property: rotation; to: 0 180 0; dur: 5000; loop: true"></a-entity>
+      <a-entity geometry="primitive: box; width: 5.2; height: 2.8; depth: 0.2" 
+                material="color: white" 
+                position="-4.2 1.2 -4.5"></a-entity>
+      <a-entity id="left-blue-2" 
+                geometry="primitive: box; width: 0.8; height: 0.8; depth: 0.1" 
+                material="color: blue" 
+                position="-5.6 1 -4.4"
+                animation="property: position; to: -5.6 1.3 -4.4; dir: alternate; dur: 2000; loop: true"></a-entity> <!-- Additional Blue Shape -->
+
+      <!-- Picture Frames on the Right Wall -->
+      <a-entity id="frame-right-1" 
+                geometry="primitive: box; width: 5.6; height: 3.2; depth: 0.2" 
+                material="color: gold" 
+                position="4.2 2 -4.6"
+                animation="property: rotation; to: 0 360 0; dur: 5000; loop: true"></a-entity>
+      <a-entity geometry="primitive: box; width: 5.2; height: 2.8; depth: 0.2" 
+                material="color: white" 
+                position="4.2 2 -4.5"></a-entity> <!-- Painting Background -->
+      <a-entity id="right-blue-1" 
+                geometry="primitive: box; width: 0.8; height: 0.8; depth: 0.1" 
+                material="color: blue" 
+                position="3.4 1.8 -4.4"
+                animation="property: position; to: 3.4 2.1 -4.4; dir: alternate; dur: 2000; loop: true"></a-entity> <!-- Additional Blue Shape -->
+
+      <!-- Adding Light Beam to Right Painting -->
+      <a-light type="spot" color="#fff" intensity="1.5" angle="45" position="5 5 -4"
+               target="#frame-right-1" castShadow="true"></a-light>
+
+      <!-- Additional Frames and Animated Artwork on the Right Wall -->
+      <a-entity id="frame-right-2" 
+                geometry="primitive: box; width: 5.6; height: 3.2; depth: 0.2" 
+                material="color: gold" 
+                position="4.2 -1.2 -4.6"
+                animation="property: rotation; to: 0 180 0; dur: 5000; loop: true"></a-entity>
+      <a-entity geometry="primitive: box; width: 5.2; height: 2.8; depth: 0.2" 
+                material="color: white" 
+                position="4.2 -1.2 -4.5"></a-entity>
+      <a-entity id="right-blue-2" 
+                geometry="primitive: box; width: 0.8; height: 0.8; depth: 0.1" 
+                material="color: blue" 
+                position="3.4 -1.4 -4.4"
+                animation="property: position; to: 3.4 -1.7 -4.4; dir: alternate; dur: 2000; loop: true"></a-entity> <!-- Additional Blue Shape -->
+
+        <!-- Interactive Button for Changing Lighting -->
+        <a-box position="0 1 0" color="blue" width="1" height="1" depth="0.2"
+        onclick="document.getElementById('directional-light').setAttribute('intensity', '0.5');"
+        scale="0.5 0.5 0.5"></a-box>
+
+        <!-- Text to display above the button -->
+        <a-text value="Click to Dim Lights" position="0 2 0" color="white"
+        font="https://aframe.io/examples/templates/fonts/mozillavr.fnt" 
+        text="align: center;"></a-text>
+
+        <!-- Directional Light with an id of 'directional-light' -->
+        <a-light id="directional-light" type="directional" position="5 10 5" intensity="0.8"></a-light>
+
+                text="align: center;"></a-text>
+
+      <!-- Simple Object Animation -->
+      <a-entity geometry="primitive: box; width: 1; height: 1; depth: 1" 
+                material="color: red" position="3 1 -5" 
+                animation="property: position; to: 3 2 -5; dir: alternate; dur: 1000; loop: true"></a-entity>
+
+      <!-- More Dynamic Artwork (Animated Circles) -->
+      <a-entity position="0 2 -6" 
+                geometry="primitive: circle; radius: 1.5" 
+                material="color: orange" 
+                animation="property: scale; to: 1.5 1.5 1.5; dur: 3000; loop: true; dir: alternate"></a-entity>
+      <a-entity position="0 1 -6" 
+                geometry="primitive: circle; radius: 1" 
+                material="color: blue" 
+                animation="property: scale; to: 1.2 1.2 1.2; dur: 2000; loop: true; dir: alternate"></a-entity>
+
+      <!-- Ground Texture -->
+      <a-plane position="0 0 -3" rotation="-90 0 0" width="12" height="12" src="https://cdn.aframe.io/a-painter/images/floor.jpg"></a-plane>
+
+    </a-scene>
+  </body>
+</html>
